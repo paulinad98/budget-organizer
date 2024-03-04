@@ -3,10 +3,10 @@ import {
   SheetContent,
   SheetTrigger,
   SheetClose,
-} from '@/components/ui/sheet/sheet'
-import { Button } from '@/components/ui/button/button'
-import { Hamburger } from '@/components/ui/hamburger/hamburger'
-import { Link } from '@/components/ui/link/link'
+} from '@/components/ui/Sheet/Sheet'
+import { Button } from '@/components/ui/Button/Button'
+import { Hamburger } from '@/components/ui/Hamburger/Hamburger'
+import { Link } from '@/components/ui/Link/Link'
 
 const menu = [
   { text: 'Transactions', href: '/transaction/all' },
