@@ -17,7 +17,10 @@ export function Breadcrumbs({ className, ...props }: BreadcrumbsProps) {
   }
 
   return (
-    <nav className={cn('flex items-center gap-1', className)} {...props}>
+    <nav
+      className={cn('flex items-center gap-1 text-text', className)}
+      {...props}
+    >
       {breadcrumbs.map(({ text, href }, index) => {
         return (
           <Fragment key={index}>
@@ -25,7 +28,7 @@ export function Breadcrumbs({ className, ...props }: BreadcrumbsProps) {
               <Typography
                 className={
                   isCurrentLink(index)
-                    ? 'text-text transition-colors hover:text-primary'
+                    ? 'transition-colors hover:text-primary'
                     : 'cursor-default text-primary'
                 }
                 variant={isCurrentLink(index) ? 'lead' : 'h1'}
@@ -35,7 +38,7 @@ export function Breadcrumbs({ className, ...props }: BreadcrumbsProps) {
             </Link>
 
             {isCurrentLink(index) ? (
-              <FeatherIcon className="text-text" icon="chevron-right" />
+              <FeatherIcon className="h-4 w-4" icon="chevron-right" />
             ) : null}
           </Fragment>
         )

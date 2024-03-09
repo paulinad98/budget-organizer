@@ -31,7 +31,7 @@ export default function RootLayout({
               <h1>Logo</h1>
             </div>
 
-            <Breadcrumbs className=" mt-1 justify-center" />
+            <Breadcrumbs className="mt-2" />
           </header>
 
           <main className=" pt-4">{children}</main>
