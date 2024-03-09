@@ -19,12 +19,12 @@ export function Sidemenu() {
   return (
     <Sheet>
       <Button asChild={true} size="icon" variant="ghost">
-        <SheetTrigger>
+        <SheetTrigger className="flex-start">
           <Hamburger />
         </SheetTrigger>
       </Button>
 
-      <SheetContent className="flex flex-col gap-1 py-8">
+      <SheetContent className="flex flex-col gap-1 py-8 ">
         {menu.map(({ href, text }) => (
           <Link key={href} href={href}>
             <Button className="w-full" asChild={true} variant="ghost" size="sm">
