@@ -11,31 +11,31 @@ const typographyConfig: {
   [key in Variant]: { className: string; component: React.ElementType }
 } = {
   h1: {
-    className: 'scroll-m-20 text-base font-normal tracking-tight lg:text-xl',
+    className: 'scroll-m-20 text-base lg:text-xl',
     component: 'h1',
   },
   h2: {
-    className: 'scroll-m-20 text-base font-normal tracking-tight lg:text-3xl',
+    className: 'scroll-m-20 text-base lg:text-3xl',
     component: 'h2',
   },
   h3: {
-    className: 'scroll-m-20 text-2xl font-semibold tracking-tight',
+    className: 'scroll-m-20 text-2xl',
     component: 'h3',
   },
   p: {
-    className: 'leading-7 [&:not(:first-child)]:mt-6',
+    className: 'leading-7',
     component: 'p',
   },
   lead: {
-    className: 'text-base text-muted-foreground lg:text-xl',
+    className: 'text-base  lg:text-xl',
     component: 'p',
   },
   large: {
-    className: 'text-lg font-semibold',
+    className: 'text-xl',
     component: 'p',
   },
   small: {
-    className: 'text-sm font-medium leading-none',
+    className: 'text-xs leading-none',
     component: 'p',
   },
 }
