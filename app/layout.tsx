@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Lato } from 'next/font/google'
 import './globals.css'
 import { Sidemenu } from '@/components/app/Sidemenu/Sidemenu'
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs/Breadcrumbs'
 
-const inter = Inter({ subsets: ['latin'] })
+const lato = Lato({
+  weight: ['300', '400', '700'],
+  display: 'swap',
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'Budget organzer',
@@ -19,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={lato.className}>
         <div className="container py-5">
           <header>
             <div className="flex items-center justify-between">
