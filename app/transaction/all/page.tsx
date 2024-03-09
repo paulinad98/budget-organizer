@@ -1,3 +1,9 @@
+import { ExpensesSummary } from '@/components/transactions/ExpensesSummary/ExpensesSummary'
+
 export default function TransactionAll() {
-  return <div>TransactionAll</div>
+  return (
+    <>
+      <ExpensesSummary />
+    </>
+  )
 }
