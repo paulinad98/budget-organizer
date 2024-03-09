@@ -1,10 +1,11 @@
 'use client'
 
+import { Fragment } from 'react'
+import FeatherIcon from 'feather-icons-react'
 import { cn } from '@/lib/utils'
 import { Link } from '@/components/ui/Link/Link'
 import { Typography } from '@/components/ui/Typography/Typography'
 import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
-import { Fragment } from 'react'
 
 type BreadcrumbsProps = React.BaseHTMLAttributes<HTMLElement>
 
@@ -16,7 +17,7 @@ export function Breadcrumbs({ className, ...props }: BreadcrumbsProps) {
   }
 
   return (
-    <nav className={cn('flex items-center gap-1', className)}>
+    <nav className={cn('flex items-center gap-1', className)} {...props}>
       {breadcrumbs.map(({ text, href }, index) => {
         return (
           <Fragment key={index}>
@@ -34,9 +35,7 @@ export function Breadcrumbs({ className, ...props }: BreadcrumbsProps) {
             </Link>
 
             {isCurrentLink(index) ? (
-              <Typography className=" text-text" variant="lead">
-                {'>'}
-              </Typography>
+              <FeatherIcon className="text-text" icon="chevron-right" />
             ) : null}
           </Fragment>
         )
