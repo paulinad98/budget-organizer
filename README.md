@@ -20,17 +20,56 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Docker Configuration
 
-To learn more about Next.js, take a look at the following resources:
+We utilize `docker-compose` for easy management of multiple containers that work together in this project.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Starting Services
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To start the services defined in `docker-compose.yml`, run the following command:
 
-## Deploy on Vercel
+```bash
+docker-compose up -d
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This command will start the containers in the background. To stop and remove the containers, you can use:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```bash
+docker-compose down
+```
+
+## Container Services
+
+db: A container for the MySQL database.
+phpmyadmin: A container for PHPMyAdmin to manage the database through a web browser.
+Volumes
+mysql-data: A volume to persist database data so that it's not lost when the container is removed.
+Accessing phpMyAdmin
+To manage the database using phpMyAdmin, visit http://localhost:8080 in your web browser.
+
+Login credentials:
+
+Username: root
+Password: my-secret-pw (or whatever password you set in docker-compose.yml)
+
+## Prisma Setup
+
+To get started with Prisma, follow these steps:
+
+```bash
+prisma init
+```
+
+Configure the .env file with the database access details.
+Update the Prisma schema (prisma/schema.prisma) with the appropriate database model.
+Apply changes to the database:
+
+```bash
+prisma migrate dev
+```
+
+Generate the Prisma client:
+
+```bash
+prisma generate
+```
