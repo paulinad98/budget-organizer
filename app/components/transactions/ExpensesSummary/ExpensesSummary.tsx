@@ -1,4 +1,4 @@
-import { Typography } from '../../ui/Typography/Typography'
+import { Typography } from '@/app/components/ui/Typography/Typography'
 
 export function ExpensesSummary() {
   return (

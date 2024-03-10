@@ -3,9 +3,9 @@
 import { Fragment } from 'react'
 import FeatherIcon from 'feather-icons-react'
 import { cn } from '@/lib/utils'
-import { Link } from '@/components/ui/Link/Link'
-import { Typography } from '@/components/ui/Typography/Typography'
-import { useBreadcrumbs } from '@/hooks/useBreadcrumbs'
+import { Link } from '@/app/components/ui/Link/Link'
+import { Typography } from '@/app/components/ui/Typography/Typography'
+import { useBreadcrumbs } from '@/app/hooks/useBreadcrumbs'
 
 type BreadcrumbsProps = React.BaseHTMLAttributes<HTMLElement>
 
