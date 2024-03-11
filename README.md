@@ -57,7 +57,7 @@ Password: my-secret-pw (or whatever password you set in docker-compose.yml)
 To get started with Prisma, follow these steps:
 
 ```bash
-prisma init
+npx prisma init
 ```
 
 Configure the .env file with the database access details.
@@ -65,11 +65,11 @@ Update the Prisma schema (prisma/schema.prisma) with the appropriate database mo
 Apply changes to the database:
 
 ```bash
-prisma migrate dev
+npx prisma migrate dev
 ```
 
 Generate the Prisma client:
 
 ```bash
-prisma generate
+npx prisma generate
 ```

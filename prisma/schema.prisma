@@ -14,8 +14,59 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
+  id       String    @id @default(uuid())
+  email    String    @unique
   password String
   name     String?
+  expanses Expense[]
+}
+
+model Expense {
+  id                 String               @id @default(uuid())
+  name               String
+  created_at         DateTime             @default(now())
+  user               User                 @relation(fields: [userId], references: [id])
+  userId             String
+  productsOnExpenses ProductsOnExpenses[]
+}
+
+model Product {
+  id                 String               @id @default(uuid())
+  name               String
+  price              Price                @relation(fields: [priceId], references: [id])
+  priceId            Int
+  productsOnExpenses ProductsOnExpenses[]
+}
+
+model ProductsOnExpenses {
+  expense      Expense @relation(fields: [expenseId], references: [id])
+  expenseId    String
+  product      Product @relation(fields: [productId], references: [id])
+  productId    String
+  productCount Int     @default(1)
+
+  @@id([expenseId, productId])
+}
+
+model Price {
+  id         Int       @id @default(autoincrement())
+  amount     Int
+  currency   Currency  @relation(fields: [currencyId], references: [id])
+  currencyId Int
+  Product    Product[]
+}
+
+model Currency {
+  id        Int       @id @default(autoincrement())
+  symbol    String?
+  prices    Price[]
+  countries Country[]
+}
+
+model Country {
+  id         Int      @id @default(autoincrement())
+  name       String
+  code       String   @unique
+  currencyId Int
+  currency   Currency @relation(fields: [currencyId], references: [id])
 }
