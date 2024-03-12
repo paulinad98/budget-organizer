@@ -39,11 +39,11 @@ model Product {
 }
 
 model ProductsOnExpenses {
-  expense      Expense @relation(fields: [expenseId], references: [id])
-  expenseId    String
-  product      Product @relation(fields: [productId], references: [id])
-  productId    String
-  productCount Int     @default(1)
+  expense   Expense @relation(fields: [expenseId], references: [id])
+  expenseId String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int     @default(1)
 
   @@id([expenseId, productId])
 }
@@ -58,7 +58,7 @@ model Price {
 
 model Currency {
   id        Int       @id @default(autoincrement())
-  symbol    String?
+  symbol    String
   prices    Price[]
   countries Country[]
 }
