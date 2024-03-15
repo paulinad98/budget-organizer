@@ -5,12 +5,16 @@ import { Typography } from '@/app/components/ui/Typography/Typography'
 import { useEffect } from 'react'
 
 export default function TransactionAll() {
-  useEffect(() => {
-    fetch('/api/product')
-      .then((response) => {
-        console.log(response.status)
-        console.log(response.ok)
+  const page = 6
 
+  useEffect(() => {
+    fetch(`/api/expense?page=${page}`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+      .then((response) => {
         return response.json()
       })
       .then((response) => {
