@@ -36,7 +36,10 @@ export async function GET(req: NextRequest) {
       },
     })
 
-    return NextResponse.json({ data: products }, { status: 200 })
+    return NextResponse.json(
+      { data: products, nextPage: page + 1 },
+      { status: 200 }
+    )
   } catch {
     return NextResponse.json(
       { message: 'Initial server error' },

@@ -3,6 +3,7 @@ import { Lato } from 'next/font/google'
 import './globals.css'
 import { Sidemenu } from '@/app/components/app/Sidemenu/Sidemenu'
 import { Breadcrumbs } from '@/app/components/ui/Breadcrumbs/Breadcrumbs'
+import { ReactQueryProvider } from '@/providers/ReactQueryProvider'
 
 const lato = Lato({
   weight: ['300', '400', '700'],
@@ -34,7 +35,9 @@ export default function RootLayout({
             <Breadcrumbs className="mt-2" />
           </header>
 
-          <main className=" pt-4">{children}</main>
+          <main className=" pt-4">
+            <ReactQueryProvider>{children}</ReactQueryProvider>
+          </main>
         </div>
       </body>
     </html>

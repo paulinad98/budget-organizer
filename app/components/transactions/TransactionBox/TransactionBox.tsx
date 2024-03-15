@@ -2,9 +2,19 @@ import { cn } from '@/lib/utils'
 import FeatherIcon from 'feather-icons-react'
 import { Typography } from '@/app/components/ui/Typography/Typography'
 
-type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement>
+type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement> & {
+  transaction: {
+    id: string
+    name: string
+    createdAt: string
+  }
+}
 
-export function TransactionBox({ className, ...props }: TransactionBoxProps) {
+export function TransactionBox({
+  className,
+  transaction,
+  ...props
+}: TransactionBoxProps) {
   return (
     <button
       className={cn(
@@ -19,7 +29,7 @@ export function TransactionBox({ className, ...props }: TransactionBoxProps) {
 
       <div className="space-y-1">
         <Typography className="text-text" variant="lead">
-          Grocery Shopping
+          {transaction.id}
         </Typography>
         <Typography className="text-secondary" variant="small">
           22 July 2021

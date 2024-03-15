@@ -2,28 +2,9 @@
 import { ExpensesSummary } from '@/app/components/transactions/ExpensesSummary/ExpensesSummary'
 import { TransactionList } from '@/app/components/transactions/TransactionList/TransactionList'
 import { Typography } from '@/app/components/ui/Typography/Typography'
-import { useEffect } from 'react'
 
 export default function TransactionAll() {
   const page = 6
-
-  useEffect(() => {
-    fetch(`/api/expense?page=${page}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }, [])
 
   return (
     <>
