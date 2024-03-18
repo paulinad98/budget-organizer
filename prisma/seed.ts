@@ -15,14 +15,22 @@ async function main() {
     },
   })
 
-  const currency = await prisma.currency.create({
-    data: {
+  const currency = await prisma.currency.upsert({
+    update: {},
+    where: {
+      id: 1,
+    },
+    create: {
       symbol: 'zł',
     },
   })
 
-  const country = await prisma.country.create({
-    data: {
+  const country = await prisma.country.upsert({
+    update: {},
+    where: {
+      code: 'pl',
+    },
+    create: {
       name: 'poland',
       code: 'pl',
       currency: {
