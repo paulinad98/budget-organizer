@@ -20,13 +20,19 @@ function getExpenses(page: number) {
 }
 
 export function TransactionList() {
-  const { data, fetchNextPage, isLoading, isFetchingNextPage } =
+  const { data, fetchNextPage, isLoading, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey: ['expense'],
       queryFn: ({ pageParam = 1 }) => getExpenses(pageParam),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
-        return lastPage.nextPage
+        const nextPage = lastPage.currentPage + 1
+
+        if (nextPage > lastPage.totalPage) {
+          return null
+        }
+
+        return nextPage
       },
     })
 
@@ -44,6 +50,8 @@ export function TransactionList() {
           </li>
         )
       })}
+
+      {!hasNextPage ? 'no more pages' : null}
 
       {(isLoading || isFetchingNextPage) && <li>Loading</li>}
     </InfiniteScroll>

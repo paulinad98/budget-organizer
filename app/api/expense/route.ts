@@ -4,6 +4,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 
 export async function GET(req: NextRequest) {
+  const PER_PAGE = 4
+
   try {
     const session = await getServerSession(authOptions)
     const user = session?.user
@@ -20,14 +22,27 @@ export async function GET(req: NextRequest) {
       return new NextResponse(
         JSON.stringify({ message: 'Invalid page number' }),
         {
-          status: 400,
+          status: 422,
         }
       )
     }
 
+    const productsCount = await prisma.expense.count({
+      where: {
+        userId: user.id,
+      },
+    })
+
+    if ((page - 1) * PER_PAGE > productsCount) {
+      return NextResponse.json(
+        { message: 'Invalid page number', data: [] },
+        { status: 422 }
+      )
+    }
+
     const products = await prisma.expense.findMany({
-      take: 4,
-      skip: +page * 4,
+      take: PER_PAGE,
+      skip: (page - 1) * PER_PAGE,
       where: {
         userId: user.id,
       },
@@ -37,10 +52,16 @@ export async function GET(req: NextRequest) {
     })
 
     return NextResponse.json(
-      { data: products, nextPage: page + 1 },
+      {
+        data: products,
+        currentPage: page,
+        totalPage: Math.ceil(productsCount / PER_PAGE),
+      },
       { status: 200 }
     )
-  } catch {
+  } catch (error) {
+    console.log(error)
+
     return NextResponse.json(
       { message: 'Initial server error' },
       { status: 500 }
