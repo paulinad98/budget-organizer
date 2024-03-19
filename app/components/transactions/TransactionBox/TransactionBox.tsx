@@ -1,20 +1,21 @@
+import type Prisma from '@prisma/client'
 import { cn } from '@/lib/utils'
 import FeatherIcon from 'feather-icons-react'
 import { Typography } from '@/app/components/ui/Typography/Typography'
 
-type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement> & {
-  transaction: {
-    id: string
-    name: string
-    createdAt: string
-  }
-}
+type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement> &
+  Omit<Readonly<Prisma.Expense>, 'createdAt'> & { createdAt: string }
 
 export function TransactionBox({
   className,
-  transaction,
+  id,
+  createdAt,
+  name,
+  userId,
   ...props
 }: TransactionBoxProps) {
+  const createdAtDate = new Date(createdAt).toLocaleDateString()
+
   return (
     <button
       className={cn(
@@ -29,10 +30,10 @@ export function TransactionBox({
 
       <div className="space-y-1">
         <Typography className="text-text" variant="lead">
-          {transaction.id}
+          {id}
         </Typography>
         <Typography className="text-secondary" variant="small">
-          22 July 2021
+          {createdAtDate}
         </Typography>
       </div>
 

@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
 
     const productsCount = await prisma.expense.count({
       where: {
-        userId: user.id,
+        userId: user?.id,
       },
     })
 
@@ -41,13 +41,11 @@ export async function GET(req: NextRequest) {
     }
 
     const products = await prisma.expense.findMany({
-      take: PER_PAGE,
+      orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
       skip: (page - 1) * PER_PAGE,
+      take: PER_PAGE,
       where: {
         userId: user.id,
-      },
-      orderBy: {
-        created_at: 'asc',
       },
     })
 
