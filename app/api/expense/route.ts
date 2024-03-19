@@ -1,49 +1,31 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authenticateUser } from '@/utils/server/auth'
+import { ResponseError } from '@/utils/responseError'
+import { getPaginationData } from '@/utils/server/pagination'
 
 export async function GET(req: NextRequest) {
-  const PER_PAGE = 4
-
   try {
-    const session = await getServerSession(authOptions)
-    const user = session?.user
+    const user = await authenticateUser()
+    const { page, skip, take } = getPaginationData(req)
 
-    if (!user) {
-      return new NextResponse(JSON.stringify({ message: 'unauthorized' }), {
-        status: 401,
-      })
-    }
-
-    const { searchParams } = new URL(req.url)
-    const page = parseInt(searchParams.get('page') || '0', 10)
-    if (isNaN(page)) {
-      return new NextResponse(
-        JSON.stringify({ message: 'Invalid page number' }),
-        {
-          status: 422,
-        }
-      )
-    }
-
-    const productsCount = await prisma.expense.count({
+    const expensesCount = await prisma.expense.count({
       where: {
         userId: user?.id,
       },
     })
 
-    if ((page - 1) * PER_PAGE > productsCount) {
+    if (skip > expensesCount) {
       return NextResponse.json(
         { message: 'Invalid page number', data: [] },
         { status: 422 }
       )
     }
 
-    const products = await prisma.expense.findMany({
+    const expenses = await prisma.expense.findMany({
       orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
-      skip: (page - 1) * PER_PAGE,
-      take: PER_PAGE,
+      skip,
+      take,
       where: {
         userId: user.id,
       },
@@ -51,14 +33,20 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(
       {
-        data: products,
+        data: expenses,
         currentPage: page,
-        totalPage: Math.ceil(productsCount / PER_PAGE),
+        totalPage: Math.ceil(expensesCount / take),
       },
       { status: 200 }
     )
   } catch (error) {
-    console.log(error)
+    if (error instanceof ResponseError) {
+      console.log(error.message)
+      return NextResponse.json(
+        { message: error.message },
+        { status: error.status }
+      )
+    }
 
     return NextResponse.json(
       { message: 'Initial server error' },
