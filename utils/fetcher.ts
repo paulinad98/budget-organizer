@@ -1,6 +1,7 @@
 import { z, ZodSchema, infer as zInfer } from 'zod'
 import { ResponseError } from './responseError'
 import type { HTTPMethod } from './types'
+import { fromZodError } from 'zod-validation-error'
 
 type FetcherConfig<Schema extends ZodSchema<any, any> | null> = {
   readonly method: HTTPMethod
@@ -31,8 +32,13 @@ export async function fetcher<Schema extends ZodSchema<any, any> | null>(
       }
 
       const data = await response.json()
+      const parsedData = schema.safeParse(data)
 
-      return schema.parse(data)
+      if (!parsedData.success) {
+        throw new ResponseError(fromZodError(parsedData.error).toString(), 400)
+      }
+
+      return parsedData.data
     }
 
     throw new ResponseError(response.statusText, response.status)
