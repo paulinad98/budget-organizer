@@ -27,3 +27,15 @@ export function getPaginationData(req: NextRequest) {
 
   return { page, skip, take }
 }
+
+export function validatePagination({
+  count,
+  skip,
+}: {
+  count: number
+  skip: number
+}) {
+  if (skip > count) {
+    throw new ResponseError('Invalid page number', 422)
+  }
+}
