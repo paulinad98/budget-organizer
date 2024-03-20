@@ -1,7 +1,7 @@
 'use client'
-import { ExpensesSummary } from '@/app/components/transactions/ExpensesSummary/ExpensesSummary'
-import { TransactionList } from '@/app/components/transactions/TransactionList/TransactionList'
-import { Typography } from '@/app/components/ui/Typography/Typography'
+import { ExpensesSummary } from '@/components/transactions/ExpensesSummary/ExpensesSummary'
+import { TransactionList } from '@/components/transactions/TransactionList/TransactionList'
+import { Typography } from '@/components/ui/Typography/Typography'
 
 export default function TransactionAll() {
   const page = 6

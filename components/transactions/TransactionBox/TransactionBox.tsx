@@ -1,7 +1,7 @@
 import type Prisma from '@prisma/client'
 import { cn } from '@/lib/utils'
 import FeatherIcon from 'feather-icons-react'
-import { Typography } from '@/app/components/ui/Typography/Typography'
+import { Typography } from '@/components/ui/Typography/Typography'
 
 type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement> &
   Omit<Readonly<Prisma.Expense>, 'createdAt'> & { createdAt: string }

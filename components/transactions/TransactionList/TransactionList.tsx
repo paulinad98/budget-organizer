@@ -1,8 +1,8 @@
 'use client'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
-import { InfiniteScroll } from '@/app/components/app/InfiniteScroll/InfiniteScroll'
-import { TransactionBox } from '@/app/components/transactions/TransactionBox/TransactionBox'
+import { InfiniteScroll } from '@/components/app/InfiniteScroll/InfiniteScroll'
+import { TransactionBox } from '@/components/transactions/TransactionBox/TransactionBox'
 import { fetcher } from '@/utils/fetcher'
 import { expansePaginationSchema } from '@/utils/schemas'
 

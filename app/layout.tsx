@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Lato } from 'next/font/google'
 import './globals.css'
-import { Sidemenu } from '@/app/components/app/Sidemenu/Sidemenu'
-import { Breadcrumbs } from '@/app/components/ui/Breadcrumbs/Breadcrumbs'
+import { Sidemenu } from '@/components/app/Sidemenu/Sidemenu'
+import { Breadcrumbs } from '@/components/ui/Breadcrumbs/Breadcrumbs'
 import { ReactQueryProvider } from '@/providers/ReactQueryProvider'
 
 const lato = Lato({
