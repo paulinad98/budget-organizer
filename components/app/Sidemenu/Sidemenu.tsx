@@ -9,9 +9,9 @@ import { Hamburger } from '@/components/ui/Hamburger/Hamburger'
 import { Link } from '@/components/ui/Link/Link'
 
 const menu = [
-  { text: 'Transactions', href: '/transaction/all' },
-  { text: 'Add transaction', href: '/transaction/add' },
-  { text: 'Stats', href: '/transaction/stats' },
+  { text: 'Expenses', href: '/expense/all' },
+  { text: 'Add expense', href: '/expense/add' },
+  { text: 'Stats', href: '/expense/stats' },
   { text: 'Settings', href: '/settings' },
 ]
 

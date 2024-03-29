@@ -1,8 +1,8 @@
 'use client'
 
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { ExpenseBox } from '@/components/expense/ExpenseBox/ExpenseBox'
 import { InfiniteScroll } from '@/components/app/InfiniteScroll/InfiniteScroll'
-import { TransactionBox } from '@/components/transactions/TransactionBox/TransactionBox'
 import { fetcher } from '@/utils/fetcher'
 import { expansePaginationSchema } from '@/utils/schemas'
 
@@ -13,7 +13,7 @@ async function getExpenses(page: number) {
   })
 }
 
-export function TransactionList() {
+export function ExpenseList() {
   const { data, fetchNextPage, isLoading, isFetchingNextPage, hasNextPage } =
     useInfiniteQuery({
       queryKey: ['expense'],
@@ -30,17 +30,17 @@ export function TransactionList() {
       },
     })
 
-  const transactions = data ? data.pages.flatMap((page) => page.data) : []
+  const expenses = data ? data.pages.flatMap((page) => page.data) : []
 
   return (
     <InfiniteScroll
       className="space-y-4"
       onIntersecting={() => fetchNextPage()}
     >
-      {transactions.map((transaction) => {
+      {expenses.map((expense) => {
         return (
-          <li key={transaction.id}>
-            <TransactionBox {...transaction} />
+          <li key={expense.id}>
+            <ExpenseBox {...expense} />
           </li>
         )
       })}

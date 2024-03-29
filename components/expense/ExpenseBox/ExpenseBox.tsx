@@ -3,17 +3,17 @@ import { cn } from '@/lib/utils'
 import FeatherIcon from 'feather-icons-react'
 import { Typography } from '@/components/ui/Typography/Typography'
 
-type TransactionBoxProps = React.BaseHTMLAttributes<HTMLElement> &
+type ExpenseBoxProps = React.BaseHTMLAttributes<HTMLElement> &
   Omit<Readonly<Prisma.Expense>, 'createdAt'> & { createdAt: string }
 
-export function TransactionBox({
+export function ExpenseBox({
   className,
   id,
   createdAt,
   name,
   userId,
   ...props
-}: TransactionBoxProps) {
+}: ExpenseBoxProps) {
   const createdAtDate = new Date(createdAt).toLocaleDateString()
 
   return (
