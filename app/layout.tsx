@@ -24,22 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={lato.className}>
-        <div className="container py-5">
-          <header>
-            <div className="flex items-center justify-between">
-              <Sidemenu />
-              <h1>Logo</h1>
-            </div>
-
-            <Breadcrumbs className="mt-2" />
-          </header>
-
-          <main className=" pt-4">
-            <ReactQueryProvider>{children}</ReactQueryProvider>
-          </main>
-        </div>
-      </body>
+      <body className={lato.className}>{children}</body>
     </html>
   )
 }
