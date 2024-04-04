@@ -7,6 +7,7 @@ import { authenticateUser } from '@/utils/server/auth'
 import { handleError } from '@/utils/server/handleError'
 import { parseExpenses } from '@/utils/server/expanse'
 import { countUserExpenses, findUserExpenses } from '@/utils/db/expense'
+import { createFile, getImage } from '@/utils/server/file'
 
 export async function GET(req: NextRequest) {
   try {
@@ -27,6 +28,18 @@ export async function GET(req: NextRequest) {
       },
       { status: 200 }
     )
+  } catch (error) {
+    handleError(error as Error)
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const image = await getImage(req)
+
+    createFile({ file: image, filePath: 'public/expanse' })
+
+    return NextResponse.json({ message: 'Success', status: 201 })
   } catch (error) {
     handleError(error as Error)
   }
